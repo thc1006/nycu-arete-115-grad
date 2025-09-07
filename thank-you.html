@@ -4,18 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>提交成功！</title>
+    <!-- 引用主樣式表，確保風格一致 -->
     <link rel="stylesheet" href="styles.css">
     <style>
-        .container { text-align: center; }
-        .success-icon { font-size: 60px; color: #2ecc71; margin-bottom: 20px; }
+        /* 頁面專屬的額外樣式 */
+        .container {
+            text-align: center;
+            /* 使用 Flexbox 讓垂直置中更完美 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            color: #2ecc71;
+            margin-bottom: 20px;
+            /* 加入動畫效果 */
+            animation: pop-in 0.5s ease-out forwards;
+        }
+
+        /* 標題與內文的動畫 */
+        .container h1, .container h2, .container p {
+            animation: fade-in 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.2s; /* 延遲出現 */
+        }
+        .container h2 { animation-delay: 0.4s; }
+        .container p { animation-delay: 0.6s; }
+
+        /* 笑話區塊的專屬樣式 */
+        .joke-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            max-width: 450px;
+            width: 100%;
+            cursor: pointer; /* 提示使用者可以點擊 */
+            transition: box-shadow 0.3s;
+            animation: fade-in 1s ease-out forwards;
+            animation-delay: 0.8s;
+            opacity: 0;
+        }
+        .joke-box:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .joke-setup {
+            color: #495057;
+            font-size: 16px;
+        }
+        .joke-punchline {
+            color: #e74c3c; /* 用紅色突顯答案 */
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+            display: none; /* 預設隱藏答案 */
+        }
+
+        /* 返回按鈕的樣式 */
         .back-link {
             display: inline-block;
             margin-top: 30px;
-            padding: 10px 20px;
+            padding: 12px 25px;
             background-color: #3498db;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+            animation: fade-in 1.2s ease-out forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* 定義動畫 */
+        @keyframes pop-in {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fade-in {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -24,8 +100,29 @@
         <div class="success-icon">✓</div>
         <h1>提交成功！</h1>
         <h2>感謝您的填寫，秀吉已收到您的資料。</h2>
+        
+        <!-- 互動式笑話區塊 -->
+        <div id="jokeBox" class="joke-box" onclick="revealJoke()">
+            <p class="joke-setup">
+                為什麼律師對自己的收支狀況特別清楚？<br>
+                <small>(點我揭曉)</small>
+            </p>
+            <p id="punchline" class="joke-punchline">
+                ... 因為律詩要「對仗」！
+            </p>
+        </div>
+
         <p>有任何問題（如確認對帳狀態）請洽詢秀吉卯咪金鋼狼。</p>
         <a href="index.html" class="back-link">返回表單首頁</a>
     </div>
+
+    <script>
+        // 簡單的 JavaScript 來顯示笑話答案
+        function revealJoke() {
+            const punchline = document.getElementById('punchline');
+            punchline.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
+
