@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百川學程畢業方案 繳費暨時段登記</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>百川學程115級畢業方案</h1>
+        <h2>繳費暨個人照時段登記</h2>
+        
+        <div class="info-box">
+            <h3>匯款資訊</h3>
+            <p><strong>銀行：</strong>玉山銀行 (808)</p>
+            <p><strong>帳號：</strong>(請填寫您自己的帳號)</p>
+            <p><strong>戶名：</strong>(請填寫您自己的戶名)</p>
+            <hr>
+            <p><strong>應繳金額：</strong></p>
+            <ul>
+                <li>A方案 (個人+團體照): $600</li>
+                <li>B方案 (畢業紀念冊): $800</li>
+                <li>A+B 方案: $1000</li>
+                <li>畢代本人享半價優惠</li>
+            </ul>
+        </div>
+
+        <!-- 
+            重要！請將 action 的網址替換成您部署後的 Google Apps Script 網址 
+        -->
+        <form id="mainForm" 
+              action="https://script.google.com/macros/s/請貼上您的部署ID/exec" 
+              method="POST" 
+              enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="studentId">1. 請輸入您的學號</label>
+                <input type="text" id="studentId" name="studentId" required placeholder="例如：111501001">
+            </div>
+
+            <div class="form-group">
+                <label for="last5">2. 您的匯款帳號後五碼</label>
+                <input type="text" id="last5" name="last5" required pattern="\d{5,6}" title="請輸入5或6位數字">
+            </div>
+
+            <div class="form-group">
+                <label for="paymentTime">3. 您的匯款日期與時間</label>
+                <input type="datetime-local" id="paymentTime" name="paymentTime" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="file">4. 上傳匯款截圖 (非必填)</label>
+                <input type="file" id="file" name="screenshotFile">
+            </div>
+
+            <div class="form-group">
+                <label>5. 請勾選<span class="highlight">所有</span>可以的個人照拍攝時段 (9/15 - 10/3)</label>
+                <div id="timeSlotsContainer" class="time-slots-grid">
+                    <!-- 時段會由 javascript.js 動態生成 -->
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">確認提交</button>
+        </form>
+    </div>
+
+    <script src="javascript.js"></script>
+</body>
+</html>
